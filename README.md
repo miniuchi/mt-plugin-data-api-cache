@@ -6,7 +6,7 @@ Data API の認証無し GET リクエストのレスポンスをファイルに
 
 ## ダウンロード
 
-* [バージョン 0.01 (2019/07/03)](https://github.com/miniuchi/mt-plugin-data-api-pm-cache/archive/0.01.zip)
+* [バージョン 0.01 (2019/07/06)](https://github.com/miniuchi/mt-plugin-data-api-pm-cache/archive/0.01.zip)
 
 [更新履歴](https://github.com/miniuchi/mt-plugin-data-api-pm-cache/releases)
 
