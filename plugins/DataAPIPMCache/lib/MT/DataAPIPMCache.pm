@@ -24,7 +24,10 @@ sub purge_all_cache {
 
 sub get_cache_instance {
     $INSTANCE ||= MT::PMCache::File->new(
-        { dir => MT->config->DataAPIPMCacheFileDir } );
+        {   dir     => MT->config->DataAPIPMCacheFileDir,
+            expires => MT->config->DataAPIPMCacheFileExpires,
+        }
+    );
 }
 
 sub is_cacheable {

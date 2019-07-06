@@ -21,8 +21,9 @@ sub new {
 sub _init {
     my $self = shift;
     my ($args) = @_;
-    $self->{dir}  = $args->{dir};
-    $self->{fmgr} = MT::FileMgr->new('Local');
+    $self->{dir}     = $args->{dir};
+    $self->{expires} = $args->{expires};
+    $self->{fmgr}    = MT::FileMgr->new('Local');
 }
 
 sub _mkdir_if_needed {
@@ -39,6 +40,7 @@ sub get {
     my ($env)    = @_;
     my $filename = $self->_get_filename($env);
     return unless -f $filename;
+    return if $self->_purge_if_expired($filename);
     my $json     = $self->{fmgr}->get_data($filename);
     my $response = eval { JSON::decode_json($json) };
     warn 'Failed to parse JSON while get: ' . $@ if $@;
@@ -61,6 +63,18 @@ sub _get_filename {
     my $request_uri = $env->{REQUEST_URI};
     my $file        = Digest::MD5::md5_hex($request_uri);
     return File::Spec->catfile( $self->{dir}, "$file.json" );
+}
+
+sub _purge_if_expired {
+    my $self = shift;
+    my ($filename) = @_;
+    return unless $self->{expires};
+    return
+        unless time - $self->{fmgr}->file_mod_time($filename)
+        > $self->{expires};
+    my $deleted = $self->{fmgr}->delete($filename);
+    die $self->{fmgr}->errstr unless $deleted;
+    1;
 }
 
 sub flush_all {

@@ -11,6 +11,8 @@ callbacks:
 config_settings:
   DataAPIPMCacheFileDir:
     default: ./mt-static/support/data-api-pm-cache
+  DataAPIPMCacheFileExpires:
+    default: 86400
   DataAPIPMCacheFilePurgeObjects:
     default: MT::Asset,MT::Author,MT::Blog,MT::Category,MT::CategorySet,MT::ContentData,MT::Comment,MT::Entry,MT::Folder,MT::Page,MT::TBPing,MT::Website
 
