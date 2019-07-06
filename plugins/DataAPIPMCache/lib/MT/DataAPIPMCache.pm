@@ -1,4 +1,4 @@
-package MT::DataAPICache;
+package MT::DataAPIPMCache;
 use strict;
 use warnings;
 
@@ -12,7 +12,7 @@ sub purge_all_cache {
 
     $PURGE_OBJS ||= +{
         map { $_ => 1 } split ',',
-        MT->config->DataAPICacheFilePurgeObjects
+        MT->config->DataAPIPMCacheFilePurgeObjects
     };
     my $class = ref $obj;
     return 1 unless $PURGE_OBJS->{$class};
@@ -24,7 +24,7 @@ sub purge_all_cache {
 
 sub get_cache_instance {
     $INSTANCE ||= MT::PMCache::File->new(
-        { dir => MT->config->DataAPICacheFileDir } );
+        { dir => MT->config->DataAPIPMCacheFileDir } );
 }
 
 sub is_cacheable {

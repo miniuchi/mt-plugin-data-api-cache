@@ -1,0 +1,21 @@
+name: DataAPIPMCache
+
+callbacks:
+  post_remove: $DataAPIPMCache::MT::DataAPIPMCache::purge_all_cache
+  post_save: $DataAPIPMCache::MT::DataAPIPMCache::purge_all_cache
+
+config_settings:
+  DataAPIPMCacheFileDir:
+    default: ./mt-static/support/data-api-pm-cache
+  DataAPIPMCacheFilePurgeObjects:
+    default: MT::Asset,MT::Author,MT::Blog,MT::Category,MT::CategorySet,MT::ContentData,MT::Comment,MT::Entry,MT::Folder,MT::Page,MT::TBPing,MT::Website
+
+plack_middlewares:
+  - name: PMCache
+    options:
+      - key: cache
+        code: $DataAPIPMCache::MT::DataAPIPMCache::get_cache_instance
+    condition: $DataAPIPMCache::MT::DataAPIPMCache::is_cacheable
+    apply_to:
+      - data_api
+

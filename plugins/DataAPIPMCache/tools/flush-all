@@ -1,0 +1,12 @@
+#!/bin/perl
+use strict;
+use warnings;
+
+use lib './lib', './plugins/DataAPIPMCache/lib';
+use MT;
+use MT::DataAPIPMCache;
+
+MT->instance;
+
+MT::DataAPIPMCache->get_cache_instance->flush_all;
+
