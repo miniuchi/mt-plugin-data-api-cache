@@ -20,6 +20,7 @@ sub new {
 sub _init {
     my $self = shift;
     my ($args) = @_;
+    $self->{auth}    = $args->{auth};
     $self->{dir}     = $args->{dir};
     $self->{expires} = $args->{expires};
     $self->{fmgr}    = MT::FileMgr->new('Local');
@@ -60,8 +61,19 @@ sub _get_filename {
     my $self        = shift;
     my ($env)       = @_;
     my $request_uri = $env->{REQUEST_URI};
-    my $file        = Digest::MD5::md5_hex($request_uri);
+    my $token       = $self->_get_token($env);
+    my $file
+        = Digest::MD5::md5_hex( ( $token ? "$token:" : '' ) . $request_uri );
     return File::Spec->catfile( $self->{dir}, "$file.json" );
+}
+
+sub _get_token {
+    my $self = shift;
+    my ($env) = @_;
+    return unless $self->{auth};
+    my $auth_header = $env->{HTTP_X_MT_AUTHORIZATION} || '';
+    my ($token) = $auth_header =~ /^MTAuth accessToken=(.+)$/;
+    $token;
 }
 
 sub _purge_if_expired {
@@ -88,9 +100,22 @@ sub flush_all {
 sub is_cacheable {
     my $self = shift;
     my ( $env, $response ) = @_;
-    !exists $env->{HTTP_X_MT_AUTHORIZATION}
+    if ( $self->{auth} && $self->_is_token_revoked( $env, $response ) ) {
+        $self->flush_all;
+        return;
+    }
+    ( $self->{auth} || !$env->{HTTP_X_MT_AUTHORIZATION} )
         && $env->{REQUEST_METHOD} eq 'GET'
         && ( !$response || $response->[0] == 200 );
+}
+
+sub _is_token_revoked {
+    my $self = shift;
+    my ( $env, $response ) = @_;
+           $env->{REQUEST_URI} =~ m!^/v\d+/(?:authentication|revoke)!
+        && $env->{REQUEST_METHOD} eq 'DELETE'
+        && $response
+        && $response->[0] == 200;
 }
 
 1;

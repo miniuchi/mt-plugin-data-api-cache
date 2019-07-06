@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/miniuchi/mt-plugin-data-api-pm-cache.svg?branch=master)](https://travis-ci.org/miniuchi/mt-plugin-data-api-pm-cache)
 
-Data API の認証無し GET リクエストのレスポンスをファイルにキャッシュします。 PSGI での動作が必要です。
+Data API の GET リクエストのレスポンスをファイルにキャッシュします。 PSGI での動作が必要です。
 
 ## ダウンロード
 

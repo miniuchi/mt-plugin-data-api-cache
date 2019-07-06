@@ -5,26 +5,32 @@ use warnings;
 use MT;
 use MT::PMCache::File;
 
-our ( $INSTANCE, $PURGE_OBJS );
+our ( $INSTANCE, $PURGE_OBJS_HASH );
 
 sub purge_all_cache {
     my ( $eh, $obj ) = @_;
-
-    $PURGE_OBJS ||= +{
-        map { $_ => 1 } split ',',
-        MT->config->DataAPIPMCacheFilePurgeObjects
-    };
-    my $class = ref $obj;
-    return 1 unless $PURGE_OBJS->{$class};
-
-    get_cache_instance()->flush_all;
-
+    if ( _get_purge_objs_hash()->{ ref $obj } ) {
+        get_cache_instance()->flush_all;
+    }
     1;
+}
+
+sub _get_purge_objs_hash {
+    unless ($PURGE_OBJS_HASH) {
+        my @objs = split ',', MT->config->DataAPIPMCacheFilePurgeObjects;
+        if ( MT->config->DataAPIPMCacheFileAuth ) {
+            push @objs,
+                ( split ',', MT->config->DataAPIPMCacheFileAuthPurgeObjects );
+        }
+        $PURGE_OBJS_HASH = +{ map { $_ => 1 } @objs };
+    }
+    $PURGE_OBJS_HASH;
 }
 
 sub get_cache_instance {
     $INSTANCE ||= MT::PMCache::File->new(
-        {   dir     => MT->config->DataAPIPMCacheFileDir,
+        {   auth    => MT->config->DataAPIPMCacheFileAuth,
+            dir     => MT->config->DataAPIPMCacheFileDir,
             expires => MT->config->DataAPIPMCacheFileExpires,
         }
     );
