@@ -2,7 +2,7 @@ name: DataAPIPMCache
 version: 0.01
 author_name: Six Apart Ltd.
 plugin_link: https://github.com/miniuchi/mt-plugin-data-api-pm-cache
-description: Data API の認証無し GET レスポンスをファイルにキャッシュします。 PSGI での動作が必要です。
+description: Data API の認証無し GET リクエストのレスポンスをファイルにキャッシュします。 PSGI での動作が必要です。
 
 callbacks:
   post_remove: $DataAPIPMCache::MT::DataAPIPMCache::purge_all_cache
