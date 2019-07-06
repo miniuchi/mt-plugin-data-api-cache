@@ -5,7 +5,6 @@ use utf8;
 use parent 'PMCache';
 
 use Digest::MD5;
-use File::Path;
 use File::Spec;
 use JSON ();
 
@@ -78,8 +77,12 @@ sub _purge_if_expired {
 }
 
 sub flush_all {
-    my $self = shift;
-    File::Path::rmtree( $self->{dir} );
+    my $self  = shift;
+    my @files = glob File::Spec->catdir( $self->{dir}, '*' );
+    for my $f (@files) {
+        my $deleted = $self->{fmgr}->delete($f);
+        warn $self->{fmgr}->errstr unless $deleted;
+    }
 }
 
 sub is_cacheable {
