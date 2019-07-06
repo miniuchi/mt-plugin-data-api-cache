@@ -32,6 +32,7 @@ https://github.com/miniuchi/mt-plugin-data-api-pm-cache/issues
 MIT License
 
 Copyright (c) 2013 Taku AMANO. (https://github.com/usualoma/mt-plugin-DataAPIPublicCache)
+
 Copyright (c) 2019 Six Apart Ltd.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
