@@ -15,9 +15,9 @@ config_settings:
     default: 86400
   DataAPIPMCacheFileAuth:
     default: 0
-  DataAPIPMCacheFilePurgeObjects:
+  DataAPIPMCacheFilePurgeObjs:
     default: MT::Asset,MT::Author,MT::Blog,MT::Category,MT::CategorySet,MT::ContentData,MT::Comment,MT::Entry,MT::Folder,MT::Page,MT::TBPing,MT::Website
-  DataAPIPMCacheFileAuthPurgeObjects:
+  DataAPIPMCacheFileAuthPurgeObjs:
     default: MT::Association,MT::ContentField,MT::ContentType,MT::Group,MT::Log,MT::Permission,MT::Role,MT::Tag,MT::Template,MT::TemplateMap
 
 plack_middlewares:

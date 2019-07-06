@@ -17,10 +17,10 @@ sub purge_all_cache {
 
 sub _get_purge_objs_hash {
     unless ($PURGE_OBJS_HASH) {
-        my @objs = split ',', MT->config->DataAPIPMCacheFilePurgeObjects;
+        my @objs = split ',', MT->config->DataAPIPMCacheFilePurgeObjs;
         if ( MT->config->DataAPIPMCacheFileAuth ) {
             push @objs,
-                ( split ',', MT->config->DataAPIPMCacheFileAuthPurgeObjects );
+                ( split ',', MT->config->DataAPIPMCacheFileAuthPurgeObjs );
         }
         $PURGE_OBJS_HASH = +{ map { $_ => 1 } @objs };
     }
