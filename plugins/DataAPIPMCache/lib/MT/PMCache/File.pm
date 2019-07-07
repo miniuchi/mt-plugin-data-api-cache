@@ -112,7 +112,7 @@ sub is_cacheable {
 sub _is_token_revoked {
     my $self = shift;
     my ( $env, $response ) = @_;
-           $env->{REQUEST_URI} =~ m!^/v\d+/(?:authentication|revoke)!
+           $env->{REQUEST_URI} =~ m!^/v[1-9][0-9]*/(?:authentication|revoke)!
         && $env->{REQUEST_METHOD} eq 'DELETE'
         && $response
         && $response->[0] == 200;
