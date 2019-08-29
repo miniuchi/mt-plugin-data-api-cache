@@ -1,14 +1,14 @@
 # DataAPIPMCache プラグイン for Movable Type
 
-[![Build Status](https://travis-ci.org/miniuchi/mt-plugin-data-api-pm-cache.svg?branch=master)](https://travis-ci.org/miniuchi/mt-plugin-data-api-pm-cache)
+[![Build Status](https://travis-ci.org/movabletype/mt-plugin-data-api-pm-cache.svg?branch=master)](https://travis-ci.org/movabletype/mt-plugin-data-api-pm-cache)
 
 Data API の GET リクエストのレスポンスをファイルにキャッシュします。 PSGI での動作が必要です。
 
 ## ダウンロード
 
-* [バージョン 0.01 (2019/07/06)](https://github.com/miniuchi/mt-plugin-data-api-pm-cache/archive/0.01.zip)
+* [バージョン 0.01 (2019/07/06)](https://github.com/movabletype/mt-plugin-data-api-pm-cache/archive/0.01.zip)
 
-[更新履歴](https://github.com/miniuchi/mt-plugin-data-api-pm-cache/releases)
+[更新履歴](https://github.com/movabletype/mt-plugin-data-api-pm-cache/releases)
 
 ## インストール
 
@@ -25,7 +25,7 @@ Data API の GET リクエストのレスポンスをファイルにキャッシ
 本プラグインは Movable Type 製品サポートの対象外となります。
 不具合・ご要望は GitHub リポジトリの Issues の方までご連絡ください。
 
-https://github.com/miniuchi/mt-plugin-data-api-pm-cache/issues
+https://github.com/movabletype/mt-plugin-data-api-pm-cache/issues
 
 ## ライセンス
 

@@ -1,7 +1,7 @@
 name: DataAPIPMCache
 version: 0.01
 author_name: Six Apart Ltd.
-plugin_link: https://github.com/miniuchi/mt-plugin-data-api-pm-cache
+plugin_link: https://github.com/movabletype/mt-plugin-data-api-pm-cache
 description: Data API の GET リクエストのレスポンスをファイルにキャッシュします。 PSGI での動作が必要です。
 
 callbacks:
