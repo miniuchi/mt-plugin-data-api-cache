@@ -1,3 +1,5 @@
+This plugin is no longer supported in Movable Type 8 and later.
+
 # DataAPIPMCache プラグイン for Movable Type
 
 [![Build Status](https://travis-ci.org/movabletype/mt-plugin-data-api-pm-cache.svg?branch=master)](https://travis-ci.org/movabletype/mt-plugin-data-api-pm-cache)
